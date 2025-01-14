@@ -2,31 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const postModal = require('./models/post.model');
+
 const app = express();
 app.use(express.json());
 
-// http request
+app.use('/api/post', require('./routes/post.route.js'));
 
-app.get('/api/get', (req, res) => {
-  try {
-    res.status(201).send('Hello world');
-  } catch (error) {
-    res.status(500).send(`Get so'rovida qandaydir xato bor Xato: ${error}`);
-  }
-});
 
-app.post('/api/post', (req, res) => {
-  try {
-    const { firstName, email, password } = req.body;
-    res
-      .status(201)
-      .send(
-        `Hello ${firstName} your email is ${email} and password is ${password}`
-      );
-  } catch (error) {
-    res.status(500).send(`Post so'rovida qandaydir xato bor Xato: ${error}`);
-  }
-});
 
 const PORT = process.env.PORT;
 
